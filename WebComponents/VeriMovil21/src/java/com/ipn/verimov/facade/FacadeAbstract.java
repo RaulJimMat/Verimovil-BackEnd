@@ -16,7 +16,13 @@ import javax.persistence.Persistence;
  */
 public abstract class FacadeAbstract<T> {
     
-    protected final EntityManager em = Persistence.createEntityManagerFactory("VeriMovil21PU").createEntityManager();
+    protected  EntityManager em ;
+
+    public FacadeAbstract() {
+        em = Persistence.createEntityManagerFactory("VeriMovil21PU").createEntityManager();
+    }
+    
+    
     
     public abstract List<T> getEntities();
     public abstract T getEntity(Object id);

@@ -5,7 +5,8 @@
  */
 package com.ipn.verimov.facade;
 
-import com.ipn.verimov.modelo.Marca;
+import com.ipn.verimov.modelo.Anio;
+import com.ipn.verimov.modelo.AnioPK;
 import java.util.List;
 import javax.persistence.TypedQuery;
 
@@ -13,49 +14,46 @@ import javax.persistence.TypedQuery;
  *
  * @author Raul
  */
-public class MarcaFacade extends FacadeAbstract<Marca>{
+public class AnioFacade extends FacadeAbstract<Anio>{
 
-    public MarcaFacade() {
+    public AnioFacade() {
         super();
     }
-    
+
     @Override
-    public List<Marca> getEntities() {
-        TypedQuery<Marca> query = em.createNamedQuery("Marca.findAll", Marca.class);
+    public List<Anio> getEntities() {
+        TypedQuery<Anio> query = em.createNamedQuery("Anio.findAll",Anio.class);
         return query.getResultList();
     }
 
     @Override
-    public Marca getEntity(Object id) {
-        Integer primaryKey = (Integer)id;
-        Marca m;
-        m = em.find(Marca.class, primaryKey); //Regresa IllegalArgumentException Si no lo encuentra
-        return m;
+    public Anio getEntity(Object id) {
+        Anio a;
+        AnioPK primaryKey = (AnioPK)id;
+        a = em.find(Anio.class, primaryKey);
+        return a;
     }
 
     @Override
-    public void save(Marca entity) {
+    public void save(Anio entity) {
         em.getTransaction().begin();
         em.persist(entity);
         em.getTransaction().commit();
     }
 
     @Override
-    public void update(Marca entity) {
+    public void update(Anio entity) {
         em.getTransaction().begin();
         em.merge(entity);
         em.getTransaction().commit();
     }
 
     @Override
-    public void delete(Marca entity) {
+    public void delete(Anio entity) {
         em.getTransaction().begin();
         em.remove(entity);
         em.getTransaction().commit();
     }
-    
-    
-    
     
     
     

@@ -5,7 +5,8 @@
  */
 package com.ipn.verimov.facade;
 
-import com.ipn.verimov.modelo.Marca;
+import com.ipn.verimov.modelo.Version;
+import com.ipn.verimov.modelo.VersionPK;
 import java.util.List;
 import javax.persistence.TypedQuery;
 
@@ -13,49 +14,46 @@ import javax.persistence.TypedQuery;
  *
  * @author Raul
  */
-public class MarcaFacade extends FacadeAbstract<Marca>{
+public class VersionFacade extends FacadeAbstract<Version>{
 
-    public MarcaFacade() {
+    public VersionFacade() {
         super();
     }
     
     @Override
-    public List<Marca> getEntities() {
-        TypedQuery<Marca> query = em.createNamedQuery("Marca.findAll", Marca.class);
-        return query.getResultList();
+    public List<Version> getEntities() {
+        TypedQuery<Version> query = em.createNamedQuery("Version.findAll", Version.class);
+        return  query.getResultList();
     }
 
     @Override
-    public Marca getEntity(Object id) {
-        Integer primaryKey = (Integer)id;
-        Marca m;
-        m = em.find(Marca.class, primaryKey); //Regresa IllegalArgumentException Si no lo encuentra
-        return m;
+    public Version getEntity(Object id) {
+        Version v;
+        VersionPK primaryKey = (VersionPK)id;
+        v = em.find(Version.class, primaryKey);// Lanza IllegalArgumentException si no existe la referencia
+        return v;
     }
 
     @Override
-    public void save(Marca entity) {
+    public void save(Version entity) {
         em.getTransaction().begin();
         em.persist(entity);
         em.getTransaction().commit();
     }
 
     @Override
-    public void update(Marca entity) {
+    public void update(Version entity) {
         em.getTransaction().begin();
         em.merge(entity);
         em.getTransaction().commit();
     }
 
     @Override
-    public void delete(Marca entity) {
+    public void delete(Version entity) {
         em.getTransaction().begin();
         em.remove(entity);
         em.getTransaction().commit();
     }
-    
-    
-    
     
     
     
