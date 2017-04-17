@@ -18,7 +18,7 @@ public class RegistroFacade extends FacadeAbstract<Registro>{
     public RegistroFacade() {
         super();
     }
-
+    
     
     
     @Override

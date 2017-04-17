@@ -6,6 +6,7 @@
 package com.ipn.verimov.restful;
 
 import com.ipn.verimov.facade.UserFacade;
+import com.ipn.verimov.mail.RecoverPassword;
 import com.ipn.verimov.modelo.Usuario;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -96,6 +97,27 @@ import javax.ws.rs.core.Response.ResponseBuilder;
             LOGGER.log(Level.WARNING, "Usuario ya existente {0}", e);
         }
         return rb.build();
-    }  
+    }
+    
+    //Metodo para enviar email con la contraseña del usuario
+    //Regresa Respuesta  X confirmando que se envio el correo
+    
+    @GET
+    @Path("recover/{user}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response recoverPassword(@PathParam("user") String user){
+        ResponseBuilder rb;
+        try{
+            Usuario u = uc.getUser(user);
+            if(RecoverPassword.enviarMail(u.getCorreo(), u.getPassword(), u.getNombre())){
+                LOGGER.log(Level.INFO, "Se envio correo de recuperacion para {0}", u.getNombreUsuario());
+            }
+            rb = Response.ok();
+        }catch(NoResultException e){
+            rb = Response.status(Response.Status.UNAUTHORIZED);
+            LOGGER.log(Level.WARNING, "No existe usuario {0}", e);
+        }
+        return rb.build();
+    }
     
 }
