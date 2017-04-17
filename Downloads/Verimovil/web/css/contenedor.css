@@ -1,0 +1,13 @@
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  background: #f2f2f2;
+  font-family: "Roboto";
+  /*border-top: 100px solid #303F9F;*/
+}
