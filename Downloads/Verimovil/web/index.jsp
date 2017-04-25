@@ -36,7 +36,7 @@
 						</tr>
 						<tr>
 							<td><p><a href="registro.html">Registrarme</a></p></td>
-							<td><a href="">¿Olvidaste tu cuenta?</a></td> 
+							<td><a href="recupera.html">¿Olvidaste tu contraseña?</a></td> 
 						</tr>
 				</table>
                         </form>

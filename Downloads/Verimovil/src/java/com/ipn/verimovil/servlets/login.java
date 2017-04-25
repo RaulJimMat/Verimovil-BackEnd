@@ -60,7 +60,7 @@ public class login extends HttpServlet {
             case STATUS_ACCEPTED:
                 //Logueo de un Administrador
                 LOGGER.log(Level.INFO, "Administrador logueado {0}", Username);
-                request.getSession().setAttribute("user", Username);
+                request.getSession().setAttribute("admin", Username);
                 response.sendRedirect("admin.html");
                 break;
 
@@ -68,7 +68,7 @@ public class login extends HttpServlet {
                 //Logueo de un Usuario
                 LOGGER.log(Level.INFO, "Usuario logueado {0}", Username);
                 request.getSession().setAttribute("user", Username);
-                response.sendRedirect("home.html");
+                response.sendRedirect("home.jsp");
                 break;
 
             case STATUS_NOT_ACCEPTABLE:

@@ -1,32 +1,28 @@
+package com.ipn.verimovil.servlets;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.ipn.verimovil.servlets;
 
-import com.ipn.verimovil.rest.Usuario;
+import com.ipn.verimov.consumer.RestConsumer;
+import com.ipn.verimovil.rest.Marca;
 import java.io.IOException;
+import java.util.List;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.Entity;
-import javax.ws.rs.client.WebTarget;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import org.apache.catalina.WebResource;
-import org.glassfish.jersey.client.ClientResponse;
 
 /**
  *
  * @author Raul
  */
-@WebServlet(name = "NewUser", urlPatterns = {"/newuser"})
-public class NewUser extends HttpServlet {
+@WebServlet(urlPatterns = {"/Marcas"})
+public class Marcas extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,39 +35,11 @@ public class NewUser extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            //Se  obtiene los parametros que envia el usuario
-            Usuario u = new Usuario();
-            u.setNombreUsuario(request.getParameter("username"));
-            u.setNombre(request.getParameter("nombre"));
-            u.setAPaterno(request.getParameter("apellidop"));
-            u.setAMaterno(request.getParameter("apellidom"));
-            u.setCorreo(request.getParameter("email"));
-            char g = (request.getParameter("sexo").equals("Hombre"))?'m':'f';
-            u.setGenero(Character.valueOf(g));
-            u.setPassword(request.getParameter("pass"));
-            u.setRol(Character.valueOf('u'));
-            
-            //Esto va en una clase controladora del servicio rest regresa un objeto response y de parametro entran un Usuario u
-            Client client = ClientBuilder.newClient();
-            WebTarget target = client.target("http://localhost:8080/VeriMovil21/resources/login");
-            
-            
-            Response resp = target.path("registro")
-                                    .request().accept(MediaType.APPLICATION_JSON).post(Entity.json(u));
-            
-            System.out.println(resp.getStatus());
-            
-            if(resp.getStatus() == 202){
-                System.out.println("Usuario agregado");
-                
-            }
-            if(resp.getStatus() == 406){
-                System.out.println("usuario ya existe");
-            }
-            
-            
-        
-        
+            RestConsumer rc = new RestConsumer();
+            List<Marca> marcas = rc.getMarcas();
+            request.setAttribute("marcas", marcas);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("nuevamarca.jsp");
+            dispatcher.forward(request, response);
         }
     
 
