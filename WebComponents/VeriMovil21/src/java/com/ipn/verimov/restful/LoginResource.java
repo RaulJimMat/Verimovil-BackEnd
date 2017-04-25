@@ -100,8 +100,8 @@ import javax.ws.rs.core.Response.ResponseBuilder;
     }
     
     //Metodo para enviar email con la contraseña del usuario
-    //Regresa Respuesta  X confirmando que se envio el correo
-    
+    //Regresa Respuesta OK confirmando que se envio el correo
+    //Regresa Respuesta UNAUTHORIZED ya que no existe el usuario
     @GET
     @Path("recover/{user}")
     @Produces(MediaType.APPLICATION_JSON)

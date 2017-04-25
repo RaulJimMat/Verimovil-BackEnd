@@ -5,8 +5,10 @@
  */
 package com.ipn.verimov.facade;
 
+import com.ipn.verimov.modelo.Marca;
 import com.ipn.verimov.modelo.Modelo;
 import com.ipn.verimov.modelo.ModeloPK;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.TypedQuery;
 
@@ -26,6 +28,12 @@ public class ModeloFacade extends FacadeAbstract<Modelo>{
         TypedQuery<Modelo> query = em.createNamedQuery("Modelo.findAll", Modelo.class);
         return query.getResultList();
     }
+    
+    public List<Modelo> getRange(int idMarca){
+         TypedQuery<Modelo> query = em.createNamedQuery("Modelo.findByMarcaidMarca", Modelo.class);
+         query.setParameter("marcaidMarca", idMarca);
+         return query.getResultList();
+    }
 
     @Override
     public Modelo getEntity(Object id) {
@@ -37,7 +45,7 @@ public class ModeloFacade extends FacadeAbstract<Modelo>{
 
     @Override
     public void save(Modelo entity) {
-        em.getTransaction().begin();;
+        em.getTransaction().begin();
         em.persist(entity);
         em.getTransaction().commit();
     }
@@ -54,6 +62,14 @@ public class ModeloFacade extends FacadeAbstract<Modelo>{
         em.getTransaction().begin();
         em.remove(entity);
         em.getTransaction().commit();
+    }
+    
+    public List<Modelo> getByName(String name, int idMarca){
+        List<Modelo> list = new ArrayList<>();
+        TypedQuery<Modelo> query = em.createNamedQuery("Modelo.findByNombreModelo",Modelo.class);
+        query.setParameter("nombreModelo", name);
+        query.setParameter("marcaidMarca", idMarca);
+        return query.getResultList();
     }
     
     

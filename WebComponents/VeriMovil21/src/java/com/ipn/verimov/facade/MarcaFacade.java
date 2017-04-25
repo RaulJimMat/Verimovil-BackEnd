@@ -6,6 +6,7 @@
 package com.ipn.verimov.facade;
 
 import com.ipn.verimov.modelo.Marca;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.TypedQuery;
 
@@ -56,7 +57,12 @@ public class MarcaFacade extends FacadeAbstract<Marca>{
     
     
     
-    
+    public List<Marca> getByName(String name){
+        List<Marca> list = new ArrayList<>();
+        TypedQuery<Marca> query = em.createNamedQuery("Marca.findByNombreMarca", Marca.class);
+        query.setParameter("nombreMarca", name);
+        return query.getResultList();
+    }
     
     
 }

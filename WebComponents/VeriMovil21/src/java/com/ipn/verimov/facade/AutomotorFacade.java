@@ -54,6 +54,10 @@ public class AutomotorFacade extends FacadeAbstract<Automotor>{
         em.remove(entity);
         em.getTransaction().commit();
     }
+
+    public List<Automotor> getEntitiesbyUser() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     
     

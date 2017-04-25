@@ -38,7 +38,7 @@ public class RecoverPassword {
         sb.append("Password: ");
         sb.append(Password);
         sb.append("\n\n\nVerimovil :)");
-        LOGGER.log(Level.INFO, correoDestinatario);
+        //LOGGER.log(Level.INFO, correoDestinatario);
         try{
             Properties props = new Properties();
             props.setProperty("mail.smtp.host", "smtp.gmail.com");

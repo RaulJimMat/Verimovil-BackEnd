@@ -38,7 +38,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Version.findByTipoMotor", query = "SELECT v FROM Version v WHERE v.tipoMotor = :tipoMotor"),
     @NamedQuery(name = "Version.findByAnioidAnio", query = "SELECT v FROM Version v WHERE v.versionPK.anioidAnio = :anioidAnio"),
     @NamedQuery(name = "Version.findByAnioModeloidModelo", query = "SELECT v FROM Version v WHERE v.versionPK.anioModeloidModelo = :anioModeloidModelo"),
-    @NamedQuery(name = "Version.findByAnioModeloMarcaidMarca", query = "SELECT v FROM Version v WHERE v.versionPK.anioModeloMarcaidMarca = :anioModeloMarcaidMarca")})
+    @NamedQuery(name = "Version.findByAnioModeloMarcaidMarca", query = "SELECT v FROM Version v WHERE v.versionPK.anioModeloMarcaidMarca = :anioModeloMarcaidMarca"),
+    @NamedQuery(name = "Version.findByAnioModeloMarcaidMarcaAndAnioidAnioAndAnioModeloidModelo", query = "SELECT v FROM Version v WHERE v.versionPK.anioModeloMarcaidMarca = :anioModeloMarcaidMarca AND v.versionPK.anioModeloidModelo = :anioModeloidModelo AND v.versionPK.anioidAnio = :anioidAnio")})
 public class Version implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId

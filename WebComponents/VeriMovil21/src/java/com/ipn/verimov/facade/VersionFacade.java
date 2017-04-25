@@ -54,6 +54,14 @@ public class VersionFacade extends FacadeAbstract<Version>{
         em.remove(entity);
         em.getTransaction().commit();
     }
+
+    public List<Version> getRange(int marca, int modelo, int anio) {
+        TypedQuery<Version> query = em.createNamedQuery("Version.findByAnioModeloMarcaidMarcaAndAnioidAnioAndAnioModeloidModelo", Version.class);
+        query.setParameter("anioModeloMarcaidMarca", marca);
+        query.setParameter("anioModeloidModelo", modelo);
+        query.setParameter("anioidAnio", anio);
+        return  query.getResultList();
+    }
     
     
     

@@ -7,6 +7,7 @@ package com.ipn.verimov.facade;
 
 import com.ipn.verimov.modelo.Anio;
 import com.ipn.verimov.modelo.AnioPK;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.TypedQuery;
 
@@ -23,6 +24,13 @@ public class AnioFacade extends FacadeAbstract<Anio>{
     @Override
     public List<Anio> getEntities() {
         TypedQuery<Anio> query = em.createNamedQuery("Anio.findAll",Anio.class);
+        return query.getResultList();
+    }
+    
+    public List<Anio> getRange(int idMarca, int idModelo){
+        TypedQuery<Anio> query = em.createNamedQuery("Anio.findByModeloidModeloAndMarcaidMarca",Anio.class);
+        query.setParameter("modeloMarcaidMarca", idMarca);
+        query.setParameter("modeloidModelo", idModelo);
         return query.getResultList();
     }
 
@@ -53,6 +61,15 @@ public class AnioFacade extends FacadeAbstract<Anio>{
         em.getTransaction().begin();
         em.remove(entity);
         em.getTransaction().commit();
+    }
+
+    public List<Anio> getByAnio(int numAnio, int modeloMarcaidMarca, int modeloidModelo) {
+        List<Anio> list = new ArrayList<>();
+        TypedQuery<Anio> query = em.createNamedQuery("Anio.findByNumAnio",Anio.class);
+        query.setParameter("numAnio", numAnio);
+        query.setParameter("modeloMarcaidMarca", modeloMarcaidMarca);
+        query.setParameter("modeloidModelo", modeloidModelo);  
+        return query.getResultList();
     }
     
     

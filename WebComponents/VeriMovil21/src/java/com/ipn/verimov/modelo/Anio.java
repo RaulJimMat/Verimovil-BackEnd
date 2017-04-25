@@ -33,9 +33,10 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Anio.findAll", query = "SELECT a FROM Anio a"),
     @NamedQuery(name = "Anio.findByIdAnio", query = "SELECT a FROM Anio a WHERE a.anioPK.idAnio = :idAnio"),
-    @NamedQuery(name = "Anio.findByNumAnio", query = "SELECT a FROM Anio a WHERE a.numAnio = :numAnio"),
+    @NamedQuery(name = "Anio.findByNumAnio", query = "SELECT a FROM Anio a WHERE a.numAnio = :numAnio AND a.anioPK.modeloMarcaidMarca = :modeloMarcaidMarca AND a.anioPK.modeloidModelo = :modeloidModelo"),
     @NamedQuery(name = "Anio.findByModeloidModelo", query = "SELECT a FROM Anio a WHERE a.anioPK.modeloidModelo = :modeloidModelo"),
-    @NamedQuery(name = "Anio.findByModeloMarcaidMarca", query = "SELECT a FROM Anio a WHERE a.anioPK.modeloMarcaidMarca = :modeloMarcaidMarca")})
+    @NamedQuery(name = "Anio.findByModeloMarcaidMarca", query = "SELECT a FROM Anio a WHERE a.anioPK.modeloMarcaidMarca = :modeloMarcaidMarca"),
+    @NamedQuery(name = "Anio.findByModeloidModeloAndMarcaidMarca", query = "SELECT a FROM Anio a WHERE a.anioPK.modeloMarcaidMarca = :modeloMarcaidMarca AND a.anioPK.modeloidModelo = :modeloidModelo")})
 public class Anio implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
